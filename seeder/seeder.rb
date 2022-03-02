@@ -6,4 +6,5 @@ pages << {
   vars: {
     category: "Women's clothing"
   }
+  fetch_type: "browser"
 }

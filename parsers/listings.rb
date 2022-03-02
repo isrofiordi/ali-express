@@ -4,6 +4,7 @@ nokogiri = Nokogiri.HTML(content)
 products = nokogiri.css('.JIIxO a._3t7zg')
 products.each do |product|
   url = "https://www.aliexpress.com" + product['href'].text
+  # puts "ahaide"
   url = url.split('?').first
   pages <<{
     url: url,
@@ -15,6 +16,7 @@ products.each do |product|
       url: url
     }
   }
+  outputs << {url:url}
 end
 
 # products.each do |product|
