@@ -3,23 +3,38 @@ nokogiri = Nokogiri.HTML(content)
 #load products
 products = nokogiri.css('.JIIxO a._3t7zg')
 products.each do |product|
-  a_element = product
-  if a_element
-    url = URI.join('https:', a_element['href']).to_s.split('?').first
-    if url =~ /\Ahttps?:\/\//
-      pages << {
-          url: url,
-          page_type: 'products',
-          fetch_type: 'browser',
-          force_fetch: true,
-          vars: {
-            category: page['vars']['category'],
-            url: url
-          }
-        }
-    end
-  end
+  url = "https://www.aliexpress.com" + product['href'].text
+  url = url.split('?').first
+  pages <<{
+    url: url,
+    page_type: 'products',
+    fetch_type: 'browser',
+    force_fetch: true,
+    vars: {
+      category: page['vars']['category'],
+      url: url
+    }
+  }
 end
+
+# products.each do |product|
+#   a_element = product
+#   if a_element
+#     url = URI.join('https:', a_element['href']).to_s.split('?').first
+#     if url =~ /\Ahttps?:\/\//
+#       pages << {
+#           url: url,
+#           page_type: 'products',
+#           fetch_type: 'browser',
+#           force_fetch: true,
+#           vars: {
+#             category: page['vars']['category'],
+#             url: url
+#           }
+#         }
+#     end
+#   end
+# end
 
 #load paginated links
 pagination_links = nokogiri.css('#pagination-bottom a')
