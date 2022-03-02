@@ -6,7 +6,7 @@ products.each do |product|
   a_element = product.at_css('a.product')
   if a_element
     url = URI.join('https:', a_element['href']).to_s.split('?').first
-    if url =~ /\Ahttps?:\/\//i
+    if url =~ /\Ahttps?:\/\//
       pages << {
           url: url,
           page_type: 'products',
