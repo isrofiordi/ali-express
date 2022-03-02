@@ -4,7 +4,6 @@ nokogiri = Nokogiri.HTML(content)
 products = nokogiri.css('.JIIxO a._3t7zg')
 products.each do |product|
   url = "https://www.aliexpress.com" + product['href'].text
-  # puts "ahaide"
   url = url.split('?').first
   pages <<{
     url: url,
@@ -16,7 +15,6 @@ products.each do |product|
       url: url
     }
   }
-  outputs << {url:url}
 end
 
 # products.each do |product|
@@ -39,14 +37,14 @@ end
 # end
 
 #load paginated links
-pagination_links = nokogiri.css('#pagination-bottom a')
-pagination_links.each do |link|
-  l_val = link.text.strip
-  if l_val !~ /next|previous/i && l_val.to_i < 11 #limit pagination to 10 pages
-    url = URI.join('https:', link['href']).to_s.split('?').first
-    pages << {
-        url: url,
-        page_type: 'listings'
-      }
-  end
-end
+# pagination_links = nokogiri.css('#pagination-bottom a')
+# pagination_links.each do |link|
+#   l_val = link.text.strip
+#   if l_val !~ /next|previous/i && l_val.to_i < 11 #limit pagination to 10 pages
+#     url = URI.join('https:', link['href']).to_s.split('?').first
+#     pages << {
+#         url: url,
+#         page_type: 'listings'
+#       }
+#   end
+# end
