@@ -6,5 +6,15 @@ pages << {
   vars: {
     category: "Women's clothing"
   },
-  fetch_type: "browser"
+  fetch_type: "browser",
+  driver: {
+    pre_code: "
+    await page.evaluate('window.scrollBy(0,1200)');
+    await sleep(1000);
+    await page.evaluate('window.scrollBy(0,1200)');
+    await sleep(1000);
+    await page.evaluate('window.scrollBy(0,1200)');
+    await sleep(1000);
+    "
+  }
 }
