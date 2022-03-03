@@ -20,11 +20,11 @@ end
 # load next page
 indeks = page['vars']['i']
 puts indeks
-next_url = page['vars']['root-url']+"?page=#{indeks}" if indeks < 11
+next_url = page['vars']['root-url']+"?page=#{indeks}" if indeks < 4 #sampai page 3 aja dulu
 indeks += 1 #page selanjutnya
 
-# input ke pages queue
-if indeks < 11
+# input ke pages queue, cukup sampai page 3 aja dulu
+if indeks < 4
   pages << {
     page_type: "listings",
     method: "GET",
