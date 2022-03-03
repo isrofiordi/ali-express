@@ -8,7 +8,7 @@ pages << {
   },
   fetch_type: "browser",
   driver: {
-    pre_code: "
+    code: "
     await page.evaluate('window.scrollBy(0,1200)');
     await sleep(1000);
     await page.evaluate('window.scrollBy(0,1200)');
