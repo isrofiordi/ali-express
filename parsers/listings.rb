@@ -17,32 +17,13 @@ products.each do |product|
   }
 end
 
-# products.each do |product|
-#   a_element = product
-#   if a_element
-#     url = URI.join('https:', a_element['href']).to_s.split('?').first
-#     if url =~ /\Ahttps?:\/\//
-#       pages << {
-#           url: url,
-#           page_type: 'products',
-#           fetch_type: 'browser',
-#           force_fetch: true,
-#           vars: {
-#             category: page['vars']['category'],
-#             url: url
-#           }
-#         }
-#     end
-#   end
-# end
-
 # load next page
 indeks = page['vars']['i']
 puts indeks
 next_url = page['vars']['root-url']+"?page=#{indeks}" if indeks < 11
 indeks += 1 #page selanjutnya
 
-# input ke pages
+# input ke pages queue
 if indeks < 11
   pages << {
     page_type: "listings",
@@ -71,16 +52,3 @@ if indeks < 11
     }
   }
 end
-
-
-# pagination_links = nokogiri.css('#pagination-bottom a')
-# pagination_links.each do |link|
-#   l_val = link.text.strip
-#   if l_val !~ /next|previous/i && l_val.to_i < 11 #limit pagination to 10 pages
-#     url = URI.join('https:', link['href']).to_s.split('?').first
-#     pages << {
-#         url: url,
-#         page_type: 'listings'
-#       }
-#   end
-# end
