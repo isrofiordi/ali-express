@@ -6,7 +6,7 @@ pages << {
   vars: {
     category: "Women's clothing",
     "root-url"=> "https://www.aliexpress.com/category/100003109/women-clothing.html",
-    "i"=> 2 #indeks buat ke page 2
+    "i"=> 1 # menandakan ini page 1
   },
   fetch_type: "browser",
   driver: {

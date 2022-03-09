@@ -1,30 +1,36 @@
 nokogiri = Nokogiri.HTML(content)
 
-#load products
-products = nokogiri.css('.JIIxO a._3t7zg')
-products.each do |product|
-  url = "https://www.aliexpress.com" + product['href']
-  url = url.split('?').first
-  pages <<{
-    url: url,
-    page_type: 'products',
-    fetch_type: 'browser',
-    force_fetch: true,
-    vars: {
-      category: page['vars']['category'],
-      url: url
+# Cek apakah tidak ada item di sini
+is_page_not_available = nokogiri.at_css("div.query-help-wrap > p > i")
+
+unless is_page_not_available
+  #load products
+  products = nokogiri.css('.JIIxO a._3t7zg')
+  products.each do |product|
+    url = "https://www.aliexpress.com" + product['href']
+    url = url.split('?').first
+    pages <<{
+      url: url,
+      page_type: 'products',
+      fetch_type: 'browser',
+      force_fetch: true,
+      vars: {
+        category: page['vars']['category'],
+        url: url
+      }
     }
-  }
+  end
 end
+
 
 # load next page
 indeks = page['vars']['i']
-puts indeks
-next_url = page['vars']['root-url']+"?page=#{indeks}" if indeks < 6 #sampai page 3 aja dulu
 indeks += 1 #page selanjutnya
+next_url = page['vars']['root-url']+"?page=#{indeks}" #Next Url
 
-# input ke pages queue, cukup sampai page 5 aja dulu
-if indeks < 6
+
+# input ke pages queue
+unless is_page_not_available
   pages << {
     page_type: "listings",
     method: "GET",

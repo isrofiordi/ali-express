@@ -11,6 +11,7 @@ product['category'] = page['vars']['category']
 
 #extract title
 product['title'] = nokogiri.at_css('.product-title-text').text.strip unless nokogiri.at_css('.product-title-text').nil?
+raise "title can't be captured" if nokogiri.at_css('.product-title-text').nil? #early warning system page bermasalah
 
 #extract product image
 product['image_url'] = nokogiri.at_css('img.magnifier-image')['src'] unless nokogiri.at_css('img.magnifier-image')['src'].nil?
